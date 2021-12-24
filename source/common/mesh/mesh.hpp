@@ -38,7 +38,7 @@ namespace our {
 
             glBindVertexArray(VAO);
 
-            // FIll the vertecies data in VBO
+            // Fill the vertecies data in VBO
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
@@ -48,11 +48,11 @@ namespace our {
         
             // Position
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
-            glVertexAttribPointer(ATTRIB_LOC_POSITION, vertices[0].position.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
+            glVertexAttribPointer(ATTRIB_LOC_POSITION, vertices[0].position.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
             // Color
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
-            glVertexAttribPointer(ATTRIB_LOC_COLOR, vertices[0].color.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+            glVertexAttribPointer(ATTRIB_LOC_COLOR, vertices[0].color.length(), GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
             // Texture
             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
