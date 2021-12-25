@@ -52,8 +52,7 @@ namespace our {
         // For the perspective camera, you can use glm::perspective
         float aspect_ratio = static_cast<float>(viewportSize.x) / viewportSize.y;
         if (cameraType == CameraType::ORTHOGRAPHIC) {
-            // getOwner()->getLocalToWorldMatrix()
-            return glm::ortho(aspect_ratio * near, aspect_ratio * far, -orthoHeight / 2, orthoHeight / 2); //! is to be changed
+            return glm::ortho(-(orthoHeight / 2) * aspect_ratio, (orthoHeight / 2) * aspect_ratio, -orthoHeight / 2, orthoHeight / 2, near, far); 
         }
 
         return glm::perspective(fovY, aspect_ratio, near, far);        
