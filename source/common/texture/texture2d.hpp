@@ -17,14 +17,12 @@ namespace our
         {
             //TODO: Complete this function
             glGenTextures(1, &name);
-            bind();
         };
 
         // This deconstructor deletes the underlying OpenGL texture
         ~Texture2D()
         {
             //TODO: Complete this function
-            unbind();
             glDeleteTextures(1,&name);
         }
 
