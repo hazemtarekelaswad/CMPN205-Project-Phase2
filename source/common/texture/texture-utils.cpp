@@ -30,10 +30,14 @@ glm::ivec2 our::texture_utils::loadImage(Texture2D &texture, const char *filenam
     //TODO: Finish this function
     //HINT: The steps should be as follows: bind the texture, send the pixel data to the GPU, then generate the mipmap (if requested).
     texture.bind();
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); 
+    //Allows elements of an image array to be read by shaders where the parameters are the target,                                                                                             
+    // level (0 is the base image level), the number of color components in the texture,
+    // width and height  of the texture image
+    // The last parameter is the actual data of the image
     if (generate_mipmap)
     {
-        glGenerateMipmap(GL_TEXTURE_2D);
+        glGenerateMipmap(GL_TEXTURE_2D); //Generates mipmaps for the specified texture object that is bound to the target
     }
 
     stbi_image_free(data); //Free image data after uploading to GPU

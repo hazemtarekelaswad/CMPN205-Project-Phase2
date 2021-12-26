@@ -12,21 +12,22 @@ namespace our {
         GLuint name;
     public:
         // This constructor creates an OpenGL sampler and saves its object name in the member variable "name" 
+        //Sampler is used to pass the texture object to the fragment shader
         Sampler() {
             //TODO: Complete this function
-            glGenSamplers(1, &name);
+            glGenSamplers(1, &name); //Generate 1 sampler and store the generated sampler object name in (name)
         };
 
         // This deconstructor deletes the underlying OpenGL sampler
         ~Sampler() { 
             //TODO: Complete this function
-            glDeleteSamplers(1, &name);
+            glDeleteSamplers(1, &name); //Deletes 1 sampler 
          }
 
         // This method binds this sampler to the given texture unit
         void bind(GLuint textureUnit) const {
             //TODO: Complete this function
-            glBindSampler(textureUnit, name);
+            glBindSampler(textureUnit, name); //texture unit is the index of the texture unit to which the sampler is bound
         }
 
         // This static method ensures that no sampler is bound to the given texture unit
@@ -39,7 +40,7 @@ namespace our {
         // This can be used to set the filtering and wrapping parameters
         void set(GLenum parameter, GLint value) const {
             //TODO: Complete this function
-            glSamplerParameteri(name,parameter,value);
+            glSamplerParameteri(name,parameter,value); //Assign value to the sampler parameter, "name" is the sampler object to be modified 
         }
 
         // This function sets a sampler paramter where the value is of type "GLfloat"
