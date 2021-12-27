@@ -28,7 +28,6 @@ namespace our {
         // a vertex array object to define how to read the vertex & element buffer during rendering 
         Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& elements)
         {
-            //TODO: Write this function
             // remember to store the number of elements in "elementCount" since you will need it for drawing
             // For the attribute locations, use the constants defined above: ATTRIB_LOC_POSITION, ATTRIB_LOC_COLOR, etc
             glGenBuffers(1, &VBO);
@@ -36,6 +35,7 @@ namespace our {
             glGenVertexArrays(1, &VAO);
             elementCount = elements.size();
 
+            // Vertex array is used to store the attribute settings and not to set them after each buffer binings
             glBindVertexArray(VAO);
 
             // Fill the vertecies data in VBO
@@ -46,19 +46,20 @@ namespace our {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * elements.size(), &elements[0], GL_STATIC_DRAW);
         
-            // Position
+            // Position attribute setting
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
             glVertexAttribPointer(ATTRIB_LOC_POSITION, vertices[0].position.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
-            // Color
+            // Color attribute setting
+            // We need to normalize the values of the vertex color as color values ranges from 0.0 to 1.0
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
             glVertexAttribPointer(ATTRIB_LOC_COLOR, vertices[0].color.length(), GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
-            // Texture
+            // Texture attribute setting
             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
             glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, vertices[0].tex_coord.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
 
-            // Normal
+            // Normal attribute setting
             glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
             glVertexAttribPointer(ATTRIB_LOC_NORMAL, vertices[0].normal.length(), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
@@ -68,7 +69,7 @@ namespace our {
         // this function should render the mesh
         void draw() 
         {
-            //TODO: Write this function
+            // Bind the vertex array and draw all the elements
             glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
             glBindVertexArray(0);
@@ -77,7 +78,6 @@ namespace our {
         // this function should delete the vertex & element buffers and the vertex array object
         ~Mesh()
         {
-            //TODO: Write this function
             glDeleteBuffers(1, &VBO);
             glDeleteBuffers(1, &EBO);
             glDeleteVertexArrays(1, &VAO);

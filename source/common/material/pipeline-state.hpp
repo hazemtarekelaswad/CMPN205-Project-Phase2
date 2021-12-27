@@ -41,31 +41,33 @@ namespace our {
         // This function should set the OpenGL options to the values specified by this structure
         // For example, if faceCulling.enabled is true, you should call glEnable(GL_CULL_FACE), otherwise, you should call glDisable(GL_CULL_FACE)
         void setup() const {
-            //TODO: Write this function
             if (faceCulling.enabled) {
-                glEnable(GL_CULL_FACE);
-                glCullFace(faceCulling.culledFace);
-                glFrontFace(faceCulling.frontFace);
+                glEnable(GL_CULL_FACE); // Enable face culling to be used
+                glCullFace(faceCulling.culledFace); // Specify which face to be culled
+                glFrontFace(faceCulling.frontFace); // Specify which face to be rendered (counter clock wise or clockwise)
             }
             else
                 glDisable(GL_CULL_FACE);
 
             if (depthTesting.enabled) {
-                glEnable(GL_DEPTH_TEST);
-                glDepthFunc(depthTesting.function);
+                glEnable(GL_DEPTH_TEST);    // Enable depth testing to be used
+                glDepthFunc(depthTesting.function); // Specify when to replace the written depth value with the new value
             }
             else
                 glDisable(GL_DEPTH_TEST);
 
+            // result color = src factor * src color + dest factor * dest color
             if (blending.enabled) {
                 glEnable(GL_BLEND);
+                // Specify the the source and destination blending factors according to "constant color" and it is defaulted to be 0.
                 glBlendColor(blending.constantColor[0], blending.constantColor[1], blending.constantColor[2], blending.constantColor[3]);
-                glBlendEquation(blending.equation);
-                glBlendFunc(blending.sourceFactor, blending.destinationFactor);
+                glBlendEquation(blending.equation); // Add the two colors together including the factor (GL_FUNC_ADD)
+                glBlendFunc(blending.sourceFactor, blending.destinationFactor); // Specify the factor for source color and destination color
             }
             else
                 glDisable(GL_BLEND);
 
+            // Enable the changes in all color channels (if set to be true)
             glColorMask(colorMask[0], colorMask[1], colorMask[2], colorMask[3]);
             glDepthMask(depthMask);
         }

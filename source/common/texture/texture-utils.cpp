@@ -27,7 +27,6 @@ glm::ivec2 our::texture_utils::loadImage(Texture2D &texture, const char *filenam
         return {0, 0};
     }
     //Bind the texture such that we upload the image data to its storage
-    //TODO: Finish this function
     //HINT: The steps should be as follows: bind the texture, send the pixel data to the GPU, then generate the mipmap (if requested).
     texture.bind();
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); 

@@ -15,8 +15,9 @@ out Varyings {
 uniform mat4 transform;
 
 void main(){
-    //TODO: Change the next line to apply the transformation matrix
-    gl_Position = transform * vec4(position, 1.0);
+    // Apply the transform homogeneous matrix to the current position of the vertex 
+    // and then assign it to the new position (gl_position)
+    gl_Position = transform * vec4(position, 1.0); 
     // No need to change any of the following lines
     vs_out.position = position;
     vs_out.color = color;
